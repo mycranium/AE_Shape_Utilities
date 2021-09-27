@@ -1,4 +1,4 @@
-I realize this is a long document, but there are some specific conditions that need to exist for the script to produce the results you want. Understanding these conditions will help you get maximum enjoyment from the script and help reserve your writst and tendons for more enjoyable and meaningful activities.
+I realize this is a long document, but there are some specific conditions that need to exist for the script to produce the results you want. Understanding these conditions will help you get maximum enjoyment from the script and help preserve your wrists and tendons for more enjoyable and meaningful activities.
 
 
 Overview
@@ -12,9 +12,9 @@ In Keyframe mode it adds expressions to the other layers referencing the lead la
 
 Automatic vs. Keyframe Mode
 
-The script can creat automatic follow for the shapes, where they all scale in sequence based on the delay time set with the slider control. This is good for transitioning a whole equation on or off smoothly.
+The script can creata automatic follow for the shapes, where they all scale in sequence based on the delay time set with the slider control. This is good for transitioning a whole equation on or off smoothly.
 
-It can also work in Keyframe mode, which is good if you want to manually set when different shapes scale on, for example if you want to bring certain shapes on in response to the timing of the voiceover. In this mode the lead shape gets the basic scale keyframes. All other layers get an expression that references the lead shape's scale value, and a single keyframe on the scale property. The scale effect is triggered for each shape at the time where the keyframe is in the timeline. Drag the keyframes to the points where you want the correspinding shapes to scale in.
+It can also work in Keyframe mode, which is good if you want to manually set when different shapes scale on, for example if you want to bring certain shapes on in response to the timing of the voiceover. In this mode the lead shape gets the basic scale keyframes. All other layers get an expression that references the lead shape's scale value, and a single keyframe on the scale property. The scale effect is triggered for each shape at the time where the keyframe is in the timeline. Drag the keyframes to the points where you want the corresponding shapes to scale in.
 
 The script prompts you to enter A for Automatic mode or K for Keyframe mode. It defaults to Automatic.
 
@@ -25,7 +25,7 @@ The bottom shape in the stack (as seen in the timeline UI when you twirl open th
 
 So you need to make sure the shape groups are in the desired order. For left-to-right equations, you want the shapes to be arranged so that bottom-to-top in the stack corresponds to left-to-right on screen.
 
-You can re-order the shapes manually in Illustrator or in After Effects, or you can use the shape_sort script to handle it automatically. See that script's readme file for instructions on its use.
+You can re-order the shapes manually in Illustrator or in After Effects, or you can use the AE_Shape_Sort script to handle it automatically. See that script's readme file for instructions on its use.
 
 
 Special Shape Designations
@@ -60,7 +60,7 @@ NOTE: Shape Groups must not contain other Shape Groups!
 This script can handle a group that has multiple paths in it (like a letter such as "o" that has the outer path, the inner path and a merge paths) but all the paths have to be in the top level of the group. If you group multiple groups together you will get strange results.
 
 
-Asset Preparation
+Asset Preparation When Importing from Illustrator
 
 Before you import the ai file, open it in Illustrator and make sure the layer containing the equation shapes contains no groups! Ungroup any groups that exist in the equation layer before importing the asset into After Effects. The layer should contain only paths and compound paths. If there are any groups, then when it is imported into After Effects and converted to outlines, each shape will contain extraneous paths and "merge paths" filters.
 
@@ -89,7 +89,7 @@ It's a good idea to duplicate the shape layer at this point, so if something goe
 
 Once the shapes are in the order you want, make sure the shape layer is selected and run the "textlike_v2_launcher.jsx" script. (It creates an undo group, so you can undo the operation if you don't like the results and want to try again.)
 
-Then you can use the slider to change the delay. The number represents frames.
+If you selected Automatic mode when you ran the script you can use the slider to change the delay. The number represents frames.
 
 You can change the keyframing on the lead shape to whatever you want. By default it scales in with overshoot and easing.
 

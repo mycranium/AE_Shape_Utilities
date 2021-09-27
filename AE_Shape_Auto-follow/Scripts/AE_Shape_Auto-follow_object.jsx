@@ -65,13 +65,13 @@
 
     // Loop through all shapes and set anchor and position
     mySX.setExp = function(){
-        mySX.shapesCount = mySX.contents.numProperties;
+        mySX.shapesCount = mySX.contents.numProperties; // this should be the number of shape groups
         mySX.addSlider();
-        var myGroup = mySX.contents.property(mySX.shapesCount);
-        if(myGroup.name != "Lead"){myGroup.name = "Lead";}
-        for (var r = 1; r <= mySX.shapesCount; r++) {
+        var myGroup = mySX.contents.property(mySX.shapesCount); // The bottom shape group in the stack (?)
+        if(myGroup.name != "Lead"){myGroup.name = "Lead";} // Set the bottom shape group name to Lead if it isn't already
+        for (var r = 1; r <= mySX.shapesCount; r++) { // loop shapes
             var myGroup = mySX.contents.property(r);
-            if (myGroup.name != "Lead"){
+            if (myGroup.name != "Lead"){ // do stuff if it isn't the Lead layer
                 var transforms =  myGroup.property("Transform");
                 var mult = mySX.shapesCount - myGroup.propertyIndex;
 
