@@ -1,0 +1,102 @@
+I realize this is a long document, but there are some specific conditions that need to exist for the script to produce the results you want. Understanding these conditions will help you get maximum enjoyment from the script and help reserve your writst and tendons for more enjoyable and meaningful activities.
+
+
+Overview
+
+This script will take a shape layer that contains multiple shapes and move each individual shape's anchor points down to a baseline, based on a user-chosen shape in the group. It adds scale-up/overshoot keyframes to the first shape in the group (the bottom shape in the stack).
+
+In Automatic mode it then adds expressions to the other shapes' scale properties to follow the lead shape's scale after a delay, and adds a slider control to change the delay value.
+
+In Keyframe mode it adds expressions to the other layers referencing the lead layer's scale value, and triggers the scaling with a keyframe on each shape which can be moved by the user to the desired point in time.
+
+
+Automatic vs. Keyframe Mode
+
+The script can creat automatic follow for the shapes, where they all scale in sequence based on the delay time set with the slider control. This is good for transitioning a whole equation on or off smoothly.
+
+It can also work in Keyframe mode, which is good if you want to manually set when different shapes scale on, for example if you want to bring certain shapes on in response to the timing of the voiceover. In this mode the lead shape gets the basic scale keyframes. All other layers get an expression that references the lead shape's scale value, and a single keyframe on the scale property. The scale effect is triggered for each shape at the time where the keyframe is in the timeline. Drag the keyframes to the points where you want the correspinding shapes to scale in.
+
+The script prompts you to enter A for Automatic mode or K for Keyframe mode. It defaults to Automatic.
+
+
+Shape Order
+
+The bottom shape in the stack (as seen in the timeline UI when you twirl open the Contents property) is treated as the first shape, progressing up the stack in sequence. The script does not detect the actual on-screen position of the shapes, it just runs through them in stack order from bottom to top.
+
+So you need to make sure the shape groups are in the desired order. For left-to-right equations, you want the shapes to be arranged so that bottom-to-top in the stack corresponds to left-to-right on screen.
+
+You can re-order the shapes manually in Illustrator or in After Effects, or you can use the shape_sort script to handle it automatically. See that script's readme file for instructions on its use.
+
+
+Special Shape Designations
+
+There are two special shape designations the script uses. One is the "lead" shape, the other is the "reference" shape.
+
+The lead shape is the shape that gets keyframes, and which the other shapes follow using expressions. The bottom shape in the stack will be treated as the lead shape at the time the script is run. If you move that shape anywhere besides the bottom of the stack after running the script you will get unexpected results on playback.
+
+The reference shape must be selected by the user and renamed before running the script. It is used by the script to establish the baseline position for the rest of the shapes.
+
+You should select a shape that is at least a full lower-case letter height, that sits with its bottom at the location of the baseline you want to establish. Select a shape without descenders that go below the baseline.
+
+Rename that shape group, putting the number 1 at the beginning of the name. The remainder of the name can be left as is. The numeral 1 must be the first character in the group name. For example, the new name could be "1Shape 8" or "1 Shape 8" or "1 dog butt". Make sure there is only one shape with the numeral 1 prepended to the name or things will get weird.
+
+It doesn't matter where in the stack that shape is - it doesn't have to be the first (bottom) shape.
+
+It's fine for the lead shape and the reference shape to be the same shape - this will be the case if you define the bottom shape in the stack as the reference shape. In any case, the lead shape will always be the bottom shape in the stack, so make sure you put the shape you want as the lead at the bottom of the stack before running the script.
+
+
+How It Works
+
+The script gets the reference shape's position and the distance from the anchor point to the highest and lowest vertices in the path. It then calculates how much each shape's position and anchor point values need to move so the shape is visually in its original location, with the anchor point moved to the baseline.
+
+It adds scale keyframes to the lead shape and adds expressions to the scale property of all the other shapes in the layer which makes them follow the scale value of the lead shape either after a delay (in Automatic mode) or triggered by keyframes (in Keyframe mode).
+
+In Automatic mode the delay is set by a slider control that the script adds to the shape layer. The numeric value of the slider is the number of frames of delay (it doesn't have to be an integer). The slider delay value is multiplied by each shape's position in the stack (coounting up from the bottom) so each shape is delayed a little bit more than the previous one.
+
+In Keyframe mode there is no delay. Instead, each shape (other than the lead shape) gets a single keyframe on its scale property that triggers the scaling.
+
+NOTE: Shape Groups must not contain other Shape Groups!
+
+This script can handle a group that has multiple paths in it (like a letter such as "o" that has the outer path, the inner path and a merge paths) but all the paths have to be in the top level of the group. If you group multiple groups together you will get strange results.
+
+
+Asset Preparation
+
+Before you import the ai file, open it in Illustrator and make sure the layer containing the equation shapes contains no groups! Ungroup any groups that exist in the equation layer before importing the asset into After Effects. The layer should contain only paths and compound paths. If there are any groups, then when it is imported into After Effects and converted to outlines, each shape will contain extraneous paths and "merge paths" filters.
+
+The layer containing the shapes should be a top-level layer. It should not be nested in any other layer.
+
+If you want to combine shapes into one shape for animating, it's easier to do it in Illustrator than in After Effects. For example, if there's an equals sign that should animate in as a single character, but it's actually two line shapes in Illustrator, select both paths and convert them into a Compound Path. When you import and convert the asset into After Effects the equals sign will be a single shape group that contains two paths, ready to be animated as a single character.
+
+You can also re-order the shapes manually in Illustrator if you wish.
+
+
+To Use The Script
+
+Put both textlike_v2_launcher.jsx and textlike_v2_object.jsx in your regular After Effects Scripts folder (not in ScriptUI Panels).
+
+To use the script, first prepare the asset in Illustrator as described above. Be especially careful to ungroup any groups in the equation layers.
+
+Import the asset to After Effects as a composition.
+
+Open the comp and select the desired layer, right-click it and then click "Create Shapes from Vector Layer".
+
+Twirl open the Contents of the Shape Layer. Decide which shape to use as the reference shape and rename that shape group so the numeral 1 is the first character in the name.
+
+If you have not re-ordered the shapes into left-to-right, do that manually or run the sort_shapes script.
+
+It's a good idea to duplicate the shape layer at this point, so if something goes wrong and it's too late to undo it you can have a fresh layer to work from without having to convert the ai asset and re-order the shapes again..
+
+Once the shapes are in the order you want, make sure the shape layer is selected and run the "textlike_v2_launcher.jsx" script. (It creates an undo group, so you can undo the operation if you don't like the results and want to try again.)
+
+Then you can use the slider to change the delay. The number represents frames.
+
+You can change the keyframing on the lead shape to whatever you want. By default it scales in with overshoot and easing.
+
+If you want the shapes to scale down as a transition out, simply add keyframes at the desired point in the timeline to scale down the lead layer. You need to make sure the out point of the layer occurs after the final shape is done scaling out - if you trim the outpoint to the last keyframe the later shapes will cut off before they scale down.
+
+You can keyframe and change the value of the slider if you want them to scale down faster or slower than they scaled in.
+
+If you want them to scale down in reverse order, simply keyframe the slider and change it to a negative value.
+
+Let me know if you have any problems with this script. I'd like to develop it further, and your feedback will be helpful.

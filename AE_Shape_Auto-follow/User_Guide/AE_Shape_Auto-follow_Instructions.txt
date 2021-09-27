@@ -1,0 +1,11 @@
+This script sets up multiple shapes in a shape layer to follow the animation of a lead shape with a time delay set by a slider. The script adds the slider to the shape layer.
+
+The user is prompted to type a letter to identify which transform is being acted upon. The prompt lists the letters used to specify the transform porperty.
+
+The script automatically names the bottom shape in the stack "Lead", then adds expressions to the specified transform property of all the other shapes in the stack.
+
+Animate the "Lead" shape with keyframes or expressions (the script does not add any keyframes), and the other shapes will follow after the delay multiplied by their position in the stack (ie the first shape above "Lead" will be delayed 1 x the delay set in the slider, the next shape above that will be delayed by 2 x the slider value etc.).
+
+If you want to have multiple transforms work this way you can run the script again and select a different transform property. Each property gets its own slider to control the delay, so you can set different delays for each transform property.
+
+Place both scripts in your regular scripts folder. To run it, run shape_expressions_launcher.jsx.

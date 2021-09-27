@@ -1,0 +1,31 @@
+Overview
+
+This script automatically arranges the shape groups in a shape layer based on each shape group's X position.
+
+In the shape group stack in the layer UI, shape groups with lower X values are placed lower in the stack and higher values are placed higher in the stack, so that bottom-to-top in the stack corresponds to left-to-right on screen.
+
+
+Asset Preparation
+
+If you haven't already prepared the asset, follow these steps.
+
+Before you import the ai file, open it in Illustrator and make sure the layer containing the equation shapes contains no groups! Ungroup any groups that exist in the equation layer before importing the asset into After Effects. The layer should contain only paths and compound paths. If there are any groups, then when it is imported into After Effects and converted to outlines, each shape will contain extraneous paths and "merge paths" filters.
+
+The layer containing the shapes should be a top-level layer. It should not be nested in any other layer.
+
+If you want to combine shapes into one shape for animating, it's easier to do it in Illustrator than in After Effects. For example, if there's an equals sign that should animate as a single character, but it's actually two line shapes in Illustrator, select both paths and convert them into a Compound Path. When you import and convert the asset into After Effects the equals sign will be a single shape group that contains two paths, ready to be animated as a single character.
+
+
+To Use
+
+Place both shape_sort_launcher.jsx and shape_sort_object.jsx into your regular After Effects Scripts folder (not in ScriptUI Panels).
+
+To use the script, first prepare the asset in Illustrator as described above. Be especially careful to ungroup any groups in the equation layers.
+
+Import the asset to After Effects as a composition.
+
+Open the comp and select the desired layer, right-click it and then click "Create Shapes from Vector Layer".
+
+Make sure the shape layer is selected, then run shape_sort_launcher.jsx. (It creates an undo group so you can undo it and try again if something goes wrong.)
+
+To animate the shape layer, run textlike_v2_launcher.jsx.
