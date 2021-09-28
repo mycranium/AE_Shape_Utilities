@@ -64,11 +64,11 @@
     }
 
     myTxlk.getShapeData = function(thisShape){
-        var numProps = thisShape.numProperties;
-        var verts = [];
-        for(var s = 1; s <= numProps; s++) {
-            if (thisShape.property(s).matchName == "ADBE Vectors Group"){
-                verts.push.apply(verts, thisShape.property(s).property(1).property(2).value.vertices);
+        var numProps = thisShape.numProperties; // get the number of properties this object has
+        var verts = []; // initialize container array for vertex data
+        for(var s = 1; s <= numProps; s++) { // loop all this object's properties
+            if (thisShape.property(s).matchName == "ADBE Vectors Group"){ // If we find a shape group that contains a path group
+                verts.push.apply(verts, thisShape.property(s).property(1).property(2).value.vertices); // This pushes all the elements of arg2 into the array arg1
             }
         }
         var maxY = verts[0][1];
